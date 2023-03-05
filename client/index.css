@@ -1,0 +1,13 @@
+#fortuneList {
+    display: flex;
+    flex-direction: column;
+}
+br {
+    height: 10px;
+}
+
+.fortuneCardContainer{
+    border: solid;
+    border-width: 1px;
+    margin: 5px;
+}

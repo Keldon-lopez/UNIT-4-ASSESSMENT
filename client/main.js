@@ -20,6 +20,7 @@ const createFortuneCard = (fortune) =>{
     let fortuneCardContainer = document.createElement("div")
     fortuneCardContainer.classList.add("fortuneCardContainer")
     fortuneCardContainer.innerHTML = `
+    <p>ID:${id}</p>
     <p>${text}</p>
     <button onclick="deleteFortune(${id})">delete</button>
     `

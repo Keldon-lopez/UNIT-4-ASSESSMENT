@@ -10,6 +10,7 @@ let fortuneList = [
     {id: 5,
     text:"Welcome change."},];
       
+let id = fortuneList.length + 1;
 
 module.exports = {
 

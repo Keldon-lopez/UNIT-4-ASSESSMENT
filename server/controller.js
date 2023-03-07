@@ -10,7 +10,7 @@ let fortuneList = [
     {id: 5,
     text:"Welcome change."},];
       
-let id = fortuneList.length + 1;
+let newID = fortuneList.length + 1;
 
 module.exports = {
 
@@ -24,12 +24,11 @@ module.exports = {
         res.status(200).send(randomCompliment);
     },
 
-    getFortune: (req, res) => {
-        // const fortune = ["A beautiful, smart, and loving person will be coming into your life.", "Allow compassion to guide your decisions.", "Romance moves you in a new direction.","Soon life will become more interesting.","Welcome change."];
+    getFortune: (req, res) => {// const fortune = ["A beautiful, smart, and loving person will be coming into your life.", "Allow compassion to guide your decisions.", "Romance moves you in a new direction.","Soon life will become more interesting.","Welcome change."];
       
         // choose random fortune
         let randomIndex = Math.floor(Math.random() * fortuneList.length);
-        let randomFortune = fortuneList[randomIndex];
+        let randomFortune = fortuneList[randomIndex].text;
       
         res.status(200).send(randomFortune);
     },
@@ -53,16 +52,36 @@ module.exports = {
     },
 
     createNewFortune: (req, res) => {
-        console.log(req.body)
-        console.log(req.body.text)
         const fortune = req.body.text;
-        console.log(fortune)
+        for (let index = 0; index < fortuneList.length; index++) {
+            if (fortuneList[index].id === newID) {
+                newID++
+            }
+        }
         let newFortuneObj = ({
-            id: id,
+            id: newID,
             text: fortune
         });
-        id++
+        newID++
         fortuneList.push(newFortuneObj)
+        res.status(200).send(fortuneList);
+    },
+
+    updateFortune: (req, res) => {
+        const fortuneID = req.body.id;
+        const fortuneText = req.body.text;
+        for (let index = 0; index < fortuneList.length; index++) {
+            if (fortuneList[index].id === +fortuneID) {
+                fortuneList[index] = req.body;
+                res.status(200).send(fortuneList);
+                return
+            } 
+        }
+        let noFortuneFoundMakeOne = ({
+            id: +fortuneID,
+            text: fortuneText
+        });
+        fortuneList.push(noFortuneFoundMakeOne)
         res.status(200).send(fortuneList);
     }
 

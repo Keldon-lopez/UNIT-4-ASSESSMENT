@@ -41,15 +41,29 @@ module.exports = {
     },
 
     deleteFortune: (req, res) => {
-        const { id } = req.params;
+        const fortuneID = req.params.id;
 
         for (let index = 0; index < fortuneList.length; index++) {
-            if (fortuneList[index].id === +id) {
-                fortuneList.splice(req,1)
+            if (fortuneList[index].id === +fortuneID) {
+                fortuneList.splice(index,1)
                 res.status(200).send(fortuneList);
                 return
             }
         }
+    },
+
+    createNewFortune: (req, res) => {
+        console.log(req.body)
+        console.log(req.body.text)
+        const fortune = req.body.text;
+        console.log(fortune)
+        let newFortuneObj = ({
+            id: id,
+            text: fortune
+        });
+        id++
+        fortuneList.push(newFortuneObj)
+        res.status(200).send(fortuneList);
     }
 
 }
